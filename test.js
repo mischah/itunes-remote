@@ -1,7 +1,9 @@
-import test from 'ava';
-import fn from './';
+var expect = require('chai').expect;
+var itunesRemote = require('./');
 
-test('title', t => {
-	t.is(fn('unicorns'), 'unicorns & rainbows');
-	t.end();
+
+describe("itunes-remote", function() {
+	it("returns correct string", function() {
+		expect(itunesRemote('unicorns')).to.equal('unicorns & rainbows');
+	});
 });

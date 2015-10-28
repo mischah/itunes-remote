@@ -1,7 +1,7 @@
 {
   "name": "itunes-remote",
   "version": "0.0.0",
-  "description": "My rad module",
+  "description": "control iTunes via CLI",
   "license": "MIT",
   "repository": "mischah/itunes-remote",
   "author": {
@@ -14,7 +14,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "xo && ava"
+    "test": "xo && mocha"
   },
   "files": [
     "index.js",
@@ -23,13 +23,16 @@
   "keywords": [
     "cli-app",
     "cli",
-    ""
+    "itunes",
+    "Mac",
+    "remote"
   ],
   "dependencies": {
     "meow": "^3.4.2"
   },
   "devDependencies": {
-    "ava": "^0.3.0",
+    "chai": "^3.4.0",
+    "mocha": "^2.3.3",
     "xo": "^0.10.0"
   },
   "xo": {
