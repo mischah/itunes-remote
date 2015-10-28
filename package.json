@@ -3,11 +3,17 @@
   "version": "0.0.0",
   "description": "Control iTunes via CLI",
   "license": "MIT",
-  "repository": "mischah/itunes-remote",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mischah/itunes-remote.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mischah/itunes-remote/issues"
+  },
   "author": {
     "name": "Michael Kühnel",
-    "email": "m.kuehnel@micromata.de",
-    "url": "michael-kuehnel.de"
+    "email": "mail@michael-kuehnel.de",
+    "url": "http://michael-kuehnel.de"
   },
   "bin": "cli.js",
   "engines": {
