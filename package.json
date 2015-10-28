@@ -34,7 +34,8 @@
     "remote"
   ],
   "dependencies": {
-    "meow": "^3.4.2"
+    "meow": "^3.4.2",
+    "osascript": "^1.1.0"
   },
   "devDependencies": {
     "chai": "^3.4.0",
