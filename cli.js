@@ -15,6 +15,11 @@ var cli = meow([
 	'  unicorns & rainbows',
 	'  $ itunes-remote ponies',
 	'  ponies & rainbows'
-]);
+], {
+	alias: {
+		v: 'version',
+		h: 'help'
+	}
+});
 
 console.log(itunesRemote(cli.input[0] || 'unicorns', cli.flags));
