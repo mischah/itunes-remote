@@ -8,7 +8,7 @@ var cli = meow([
 	'  $ itunes-remote [input]',
 	'',
 	'Options',
-	'  --foo  Lorem ipsum. [Default: false]',
+	'  --postfix  Lorem ipsum. [Default: false]',
 	'',
 	'Examples',
 	'  $ itunes-remote',
@@ -17,4 +17,4 @@ var cli = meow([
 	'  ponies & rainbows'
 ]);
 
-console.log(itunesRemote(cli.input[0] || 'unicorns'));
+console.log(itunesRemote(cli.input[0] || 'unicorns', cli.flags));

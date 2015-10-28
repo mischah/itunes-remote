@@ -1,6 +1,6 @@
 # itunes-remote [![Build Status](https://travis-ci.org/mischah/itunes-remote.svg?branch=master)](https://travis-ci.org/mischah/itunes-remote)
 
-> My rad module
+> Control iTunes via CLI
 
 
 ## Install
@@ -53,7 +53,7 @@ $ itunes-remote --help
     itunes-remote [input]
 
   Options
-    --foo  Lorem ipsum. [Default: false]
+    --postfix  Lorem ipsum. [Default: false]
 
   Examples
     $ itunes-remote
