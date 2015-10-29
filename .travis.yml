@@ -1,12 +1,17 @@
 os: osx
-before_install:
-  - brew update
-  - brew upgrade
-  - brew install nvm
-  - export NVM_DIR=~/.nvm
-  - source $(brew --prefix nvm)/nvm.sh
-language: node_js
-node_js:
-  - 'stable'
-  - '0.12'
-  - '0.10'
+
+env:
+  - NODE_VERSION="0.10"
+  - NODE_VERSION="0.12"
+  - NODE_VERSION="stable"
+
+install:
+  - rm -rf ~/.nvm
+  - git clone https://github.com/creationix/nvm.git ~/.nvm
+  - source ~/.nvm/nvm.sh
+  - nvm install $NODE_VERSION
+  - node --version
+  - npm install
+
+script:
+  - npm test
