@@ -15,7 +15,7 @@ var cli = meow([
 	'  $ itunes-remote she',
 	'  Hold on …',
 	'  ✔ Found songs, albums and artists containing ”she“ and generated a playlist',
-	'  ✔ Playing your songs (っ◕‿◕)っ',
+	'  ✔ Playing 12 song(s) ♪♬',
 	'',
 	'  $ itunes-remote she --stop',
 	'  Hold on …',

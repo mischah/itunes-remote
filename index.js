@@ -86,21 +86,20 @@ module.exports = function (str, opts) {
 		}
 		startSearch(str, opts);
 	} else {
+		// console.log(opts);
+		if (opts.start === true) {
+			startPlayBack();
+		}
+		if (opts.stop === true) {
+			stopPlayback();
+		}
+		if (opts.pause === true) {
+			pausePlayback();
+		}
 		if (isEmptyObject(opts)) {
 			return logSymbols.warning +
 				' Please enter something you like to listen to.\n' +
 				chalk.yellow('Enter `itunes-remote --help` for details');
-		} else {
-			console.log(opts);
-			if (opts.start === true) {
-				startPlayBack();
-			}
-			if (opts.stop === true) {
-				stopPlayback();
-			}
-			if (opts.pause === true) {
-				pausePlayback();
-			}
 		}
 	}
 
