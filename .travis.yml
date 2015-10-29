@@ -3,6 +3,8 @@ before_install:
   - brew update
   - brew upgrade
   - brew install nvm
+  - export NVM_DIR=~/.nvm
+  - source $(brew --prefix nvm)/nvm.sh
 language: node_js
 node_js:
   - 'stable'
