@@ -3,6 +3,7 @@ os: osx
 env:
   - NODE_VERSION="0.10"
   - NODE_VERSION="0.12"
+  - NODE_VERSION="4"
   - NODE_VERSION="stable"
 
 install:
