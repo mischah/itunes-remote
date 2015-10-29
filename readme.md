@@ -1,4 +1,6 @@
-# itunes-remote [![Build Status](https://travis-ci.org/mischah/itunes-remote.svg?branch=master)](https://travis-ci.org/mischah/itunes-remote)
+[![npm version](https://badge.fury.io/js/itunes-remote.svg)](http://badge.fury.io/js/itunes-remote) [![Build Status](https://travis-ci.org/mischah/itunes-remote.svg)](https://travis-ci.org/mischah/itunes-remote) [![devDependency Status](https://david-dm.org/mischah/itunes-remote/dev-status.svg)](https://david-dm.org/mischah/itunes-remote#info=devDependencies)  [![Dependency Status](https://david-dm.org/mischah/itunes-remote/status.svg)](https://david-dm.org/mischah/itunes-remote#info=Dependencies) [![Unicorn](https://img.shields.io/badge/unicorn-approved-ff69b4.svg?style=flat)](https://www.youtube.com/watch?v=Sm368W0OsHo) 
+
+# itunes-remote
 
 > Control iTunes via your terminal
 
