@@ -5,16 +5,21 @@ var itunesRemote = require('./');
 
 var cli = meow([
 	'Usage',
-	'  $ itunes-remote [input]',
+	'  $ itunes-remote [<artist|album|song> ...]',
 	'',
 	'Options',
-	'  --postfix  Lorem ipsum. [Default: false]',
+	'  --stop   Stop playing the current selection. [Default: false]',
+	'  --start  Start playing the current selection. [Default: true]',
 	'',
 	'Examples',
-	'  $ itunes-remote',
-	'  unicorns & rainbows',
-	'  $ itunes-remote ponies',
-	'  ponies & rainbows'
+	'  $ itunes-remote she',
+	'  Hold on …',
+	'  ✔ Found songs, albums and artists containing ”she“ and generated a playlist',
+	'  ✔ Playing your songs (っ◕‿◕)っ',
+	'',
+	'  $ itunes-remote she --stop',
+	'  Hold on …',
+	'  ✔ Found songs, albums and artists containing ”she“ and generated a playlist'
 ], {
 	alias: {
 		v: 'version',
@@ -22,4 +27,4 @@ var cli = meow([
 	}
 });
 
-console.log(itunesRemote(cli.input[0] || 'unicorns', cli.flags));
+console.log(itunesRemote(cli.input[0] || '', cli.flags));

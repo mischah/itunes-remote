@@ -1,6 +1,6 @@
 # itunes-remote [![Build Status](https://travis-ci.org/mischah/itunes-remote.svg?branch=master)](https://travis-ci.org/mischah/itunes-remote)
 
-> Control iTunes via CLI
+> Control iTunes via your terminal
 
 
 ## Install
@@ -12,36 +12,6 @@ $ npm install --save itunes-remote
 
 ## Usage
 
-```js
-const itunesRemote = require('itunes-remote');
-
-itunesRemote('unicorns');
-//=> 'unicorns & rainbows'
-```
-
-
-## API
-
-### itunesRemote(input, [options])
-
-#### input
-
-Type: `string`
-
-Lorem ipsum.
-
-#### options
-
-##### foo
-
-Type: `boolean`  
-Default: `false`
-
-Lorem ipsum.
-
-
-## CLI
-
 ```
 $ npm install --global itunes-remote
 ```
@@ -50,16 +20,21 @@ $ npm install --global itunes-remote
 $ itunes-remote --help
 
   Usage
-    itunes-remote [input]
-
+    $ itunes-remote [<artist|album|song> ...]
+  
   Options
-    --postfix  Lorem ipsum. [Default: false]
-
+    --stop   Stop playing the current selection. [Default: false]
+    --start  Start playing the current selection. [Default: true]
+  
   Examples
-    $ itunes-remote
-    unicorns & rainbows
-    $ itunes-remote ponies
-    ponies & rainbows
+    $ itunes-remote she
+    Hold on …
+    ✔ Found songs, albums and artists containing ”she“ and generated a playlist
+    ✔ Playing your songs (っ◕‿◕)っ
+    
+    $ itunes-remote she --stop
+    Hold on …
+    ✔ Found songs, albums and artists containing ”she“ and generated a playlist
 ```
 
 
