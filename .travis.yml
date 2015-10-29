@@ -1,4 +1,7 @@
 os: osx
+before_install:
+  - brew update && brew upgrade
+  - brew install nvm
 language: node_js
 node_js:
   - 'stable'
