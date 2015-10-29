@@ -35,6 +35,7 @@
   ],
   "dependencies": {
     "chalk": "^1.1.1",
+    "is-empty-object": "^1.1.1",
     "js-function-string": "^1.0.0",
     "log-symbols": "^1.0.2",
     "meow": "^3.4.2",
