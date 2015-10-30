@@ -3,13 +3,7 @@
   "version": "0.1.2",
   "description": "Control iTunes via CLI",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mischah/itunes-remote.git"
-  },
-  "bugs": {
-    "url": "https://github.com/mischah/itunes-remote/issues"
-  },
+  "repository": "mischah/itunes-remote",
   "author": {
     "name": "Michael Kühnel",
     "email": "mail@michael-kuehnel.de",
@@ -24,14 +18,17 @@
   },
   "files": [
     "index.js",
-    "cli.js"
+    "cli.js",
+    "lib"
   ],
   "keywords": [
     "cli-app",
     "cli",
     "itunes",
-    "Mac",
-    "remote"
+    "mac",
+    "osx",
+    "remote",
+    "music"
   ],
   "dependencies": {
     "chalk": "^1.1.1",
@@ -47,8 +44,9 @@
     "xo": "^0.10.0"
   },
   "xo": {
-    "ignores": [
-      "test.js"
+    "envs": [
+      "node",
+      "mocha"
     ]
   }
 }
