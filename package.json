@@ -31,7 +31,10 @@
     "cli",
     "itunes",
     "Mac",
-    "remote"
+    "remote",
+    "Music",
+    "Teminal",
+    "OS X"
   ],
   "dependencies": {
     "chalk": "^1.1.1",
