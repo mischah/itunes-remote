@@ -8,15 +8,11 @@
 ## Install
 
 ```
-$ npm install --save itunes-remote
+$ npm install --global itunes-remote
 ```
 
 
 ## Usage
-
-```
-$ npm install --global itunes-remote
-```
 
 ```
 $ itunes-remote --help
@@ -25,18 +21,27 @@ $ itunes-remote --help
     $ itunes-remote [<artist|album|song> ...]
   
   Options
-    --stop   Stop playing the current selection. [Default: false]
-    --start  Start playing the current selection. [Default: true]
+    --play   Start playing the current selection or search result. [Default: true]',
+    --stop   Stop playing the current selection or prevent playing the current search result. [Default: false]',
+    --pause  Pause playing the current selection. [Default: false]',
   
   Examples
-    $ itunes-remote she
-    Hold on …
-    ✔ Found songs, albums and artists containing ”she“ and generated a playlist
-    ✔ Playing your songs (っ◕‿◕)っ
-    
-    $ itunes-remote she --stop
-    Hold on …
-    ✔ Found songs, albums and artists containing ”she“ and generated a playlist
+    $ itunes-remote nicknack',
+    Hold on …',
+    ✔ Found songs, albums and artists containing ”nicknack“ and generated a temporary playlist',
+    ✔ Playing 44 song(s) ♪♬',
+
+    $  itunes-remote --pause',
+    Hold on …',
+    ✔ Paused playing ♪♬',
+
+    $  itunes-remote --play',
+    Hold on …',
+    ✔ Playing ♪♬',
+
+    $ itunes-remote emancipator --stop',
+    Hold on …',
+    ✔ Found songs, albums and artists containing ”emancipator“ and generated a temporary playlist'
 ```
 
 

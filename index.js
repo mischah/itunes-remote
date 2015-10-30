@@ -63,7 +63,7 @@ function startSearch(searchTerm, opts) {
 		if (err === null && amount) {
 			console.log(logSymbols.success, 'Found songs, albums and artists containing ”' +
 				chalk.inverse(searchTerm) + '“ and generated a temporary playlist');
-			if (opts.start) {
+			if (opts.play) {
 				startPlaylist(playlist, amount);
 			}
 		} else if (err === null) {
@@ -82,12 +82,12 @@ module.exports = function (str, opts) {
 
 	if (str) {
 		if (isEmptyObject(opts)) {
-			opts = {start: true};
+			opts = {play: true};
 		}
 		startSearch(str, opts);
 	} else {
 		// console.log(opts);
-		if (opts.start === true) {
+		if (opts.play === true) {
 			startPlayBack();
 		}
 		if (opts.stop === true) {
@@ -104,5 +104,4 @@ module.exports = function (str, opts) {
 	}
 
 	return 'Hold on …';
-	// return str + ' & ' + (opts.postfix || 'rainbows');
 };
