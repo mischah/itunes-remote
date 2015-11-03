@@ -1,39 +1,56 @@
 #!/usr/bin/env node
 'use strict';
-var meow = require('meow');
+
+var vorpal = require('vorpal')();
 var itunesRemote = require('./');
 
-var cli = meow([
-	'Usage',
-	'  $ itunes-remote [<artist|album|song> ...]',
-	'',
-	'Options',
-	'  --play   Start playing the current selection or search result. [Default: true]',
-	'  --stop   Stop playing the current selection or prevent playing the current search result. [Default: false]',
-	'  --pause  Pause playing the current selection. [Default: false]',
-	'',
-	'Examples',
-	'  $ itunes-remote nicknack',
-	'  Hold on …',
-	'  ✔ Found songs, albums and artists containing ”nicknack“ and generated a temporary playlist',
-	'  ✔ Playing 44 song(s) ♪♬',
-	'',
-	'  $  itunes-remote --pause',
-	'  Hold on …',
-	'  ✔ Paused playing ♪♬',
-	'',
-	'  $  itunes-remote --play',
-	'  Hold on …',
-	'  ✔ Playing ♪♬',
-	'',
-	'  $ itunes-remote emancipator --stop',
-	'  Hold on …',
-	'  ✔ Found songs, albums and artists containing ”emancipator“ and generated a temporary playlist'
-], {
-	alias: {
-		v: 'version',
-		h: 'help'
-	}
-});
+vorpal
+	.delimiter('iTunes:')
+	.show();
 
-console.log(itunesRemote(cli.input[0] || '', cli.flags));
+vorpal.find('exit').description('Exit itunes-remote.');
+
+vorpal
+	.command('play', 'Start playing the current selection')
+	.action(function (args, callback) {
+		var self = this;
+		self.log('Hold on …');
+		itunesRemote('play', function (response) {
+			self.log(response);
+			callback();
+		});
+	});
+
+vorpal
+	.command('stop', 'Stop playing the current selection')
+	.action(function (args, callback) {
+		var self = this;
+		self.log('Hold on …');
+		itunesRemote('stop', function (response) {
+			self.log(response);
+			callback();
+		});
+	});
+
+vorpal
+	.command('pause', 'Pause playing the current selection')
+	.action(function (args, callback) {
+		var self = this;
+		self.log('Hold on …');
+		itunesRemote('pause', function (response) {
+			self.log(response);
+			callback();
+		});
+	});
+
+vorpal
+	.command('search <searchterm>', 'Fuzzy search album, artists and songs.')
+	.option('-d, --dont-play', 'Prevent playing the search result.')
+	.action(function (args, callback) {
+		var self = this;
+		self.log('Hold on …');
+		itunesRemote('search', function (response) {
+			self.log(response);
+			callback();
+		}, args);
+	});

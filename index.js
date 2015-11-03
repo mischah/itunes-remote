@@ -8,100 +8,98 @@ var pause = require('./lib/pause');
 var stop = require('./lib/stop');
 var logSymbols = require('log-symbols');
 var chalk = require('chalk');
-var isEmptyObject = require('is-empty-object');
 
-function startPlayBack() {
+function startPlayback(callback) {
 	// Run JavaScript file through OSA
 	osascript(stringify(play.method), function (err) {
 		if (err === null) {
-			console.log(logSymbols.success, 'Playing ♪♬');
+			return callback(logSymbols.success + ' Playing ♪♬');
 		} else {
-			console.log(logSymbols.error, chalk.red(err));
+			return callback(logSymbols.error + ' ' + chalk.red(err));
 		}
 	});
 }
 
-function stopPlayback() {
+function stopPlayback(callback) {
 	// Run JavaScript file through OSA
 	osascript(stringify(stop.method), function (err) {
 		if (err === null) {
-			console.log(logSymbols.success, 'Stopped playing ♪♬');
+			return callback(logSymbols.success + ' Stopped playing ♪♬');
 		} else {
-			console.log(logSymbols.error, chalk.red(err));
+			return callback(logSymbols.error + ' ' + chalk.red(err));
 		}
 	});
 }
 
-function pausePlayback() {
+function pausePlayback(callback) {
 	// Run JavaScript file through OSA
 	osascript(stringify(pause.method), function (err) {
 		if (err === null) {
-			console.log(logSymbols.success, 'Paused playing ♪♬');
+			return callback(logSymbols.success + ' Paused playing ♪♬');
 		} else {
-			console.log(logSymbols.error, chalk.red(err));
+			return callback(logSymbols.error + ' ' + chalk.red(err));
 		}
 	});
 }
 
-function startPlaylist(playlist, amount) {
+function startPlaylist(playlist, amount, callback) {
 	// Run JavaScript file through OSA
 	osascript(stringify(play.method).replace(/{{playlist}}/, playlist), function (err) {
 		if (err === null) {
-			console.log(logSymbols.success, 'Playing ' + amount + ' song(s) ♪♬');
+			return callback(logSymbols.success + ' Playing ' + amount + ' song(s) ♪♬');
 		} else {
-			console.log(logSymbols.error, chalk.red(err));
+			return callback(logSymbols.error + ' ' + chalk.red(err));
 		}
 	});
 }
 
-function startSearch(searchTerm, opts) {
+function startSearch(searchTerm, opts, callback) {
 	// Run JavaScript file through OSA
 	osascript(stringify(search.method).replace(/{{searchTerm}}/, searchTerm), function (err, data) {
 		data = data.split(',');
 		var playlist = data[0];
 		var amount = parseInt(data[1], 10);
 		if (err === null && amount) {
-			console.log(logSymbols.success, 'Found songs, albums and artists containing ”' +
-				chalk.inverse(searchTerm) + '“ and generated a temporary playlist');
-			if (opts.play) {
-				startPlaylist(playlist, amount);
+			if (!opts.dontplay) {
+				startPlaylist(playlist, amount, function(response) {
+					return callback(response);
+				});
 			}
+			return callback(logSymbols.success + ' Found songs, albums and artists containing ”' +
+				chalk.inverse(searchTerm) + '“ and generated a temporary playlist');
 		} else if (err === null) {
-			console.log(logSymbols.error, 'Oops. Found 0 songs, albums and artists containing ”' +
+			return callback(logSymbols.error + ' Oops. Found 0 songs, albums and artists containing ”' +
 				chalk.inverse(searchTerm) + '“.');
 		} else {
-			console.log(logSymbols.error, chalk.red(err));
+			return callback(logSymbols.error + ' ' + chalk.red(err));
 		}
 	});
 }
 
-module.exports = function (str, opts) {
-	if (typeof str !== 'string') {
-		throw new TypeError('Expected a string');
+module.exports = function (command, callback, args) {
+
+	switch (command) {
+		case 'play':
+			startPlayback(function(response) {
+				return callback(response);
+			});
+			break;
+		case 'stop':
+			stopPlayback(function(response) {
+				return callback(response);
+			});
+			break;
+		case 'pause':
+			pausePlayback(function(response) {
+				return callback(response);
+			});
+			break;
+		case 'search':
+			// console.log(args);
+			startSearch(args.searchterm, args.options, function(response) {
+				return callback(response);
+			});
+			break;
 	}
 
-	if (str) {
-		if (isEmptyObject(opts)) {
-			opts = {play: true};
-		}
-		startSearch(str, opts);
-	} else {
-		// console.log(opts);
-		if (opts.play === true) {
-			startPlayBack();
-		}
-		if (opts.stop === true) {
-			stopPlayback();
-		}
-		if (opts.pause === true) {
-			pausePlayback();
-		}
-		if (isEmptyObject(opts)) {
-			return logSymbols.warning +
-				' Please enter something you like to listen to.\n' +
-				chalk.yellow('Enter `itunes-remote --help` for details');
-		}
-	}
-
-	return 'Hold on …';
 };
