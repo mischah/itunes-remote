@@ -68,6 +68,17 @@ vorpal
 	});
 
 vorpal
+	.command('back', 'Reposition to beginning of current track or go to previous track if already at start of current track.')
+	.action(function (args, callback) {
+		var self = this;
+		self.log('Hold on …');
+		itunesRemote('back', function (response) {
+			self.log(response);
+			callback();
+		});
+	});
+
+vorpal
 	.command('search <searchterm>', 'Fuzzy search album, artists and songs.')
 	.option('-d, --dont-play', 'Prevent playing the search result.')
 	.action(function (args, callback) {
