@@ -1,4 +1,5 @@
 var expect = require('chai').expect;
+require('blanket');
 var itunesRemote = require('./');
 
 describe('itunesRemote', function () {

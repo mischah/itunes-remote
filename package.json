@@ -14,7 +14,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "xo && mocha"
+    "test": "xo && mocha --require blanket -R html-cov > coverage.html"
   },
   "files": [
     "index.js",
@@ -40,6 +40,7 @@
     "vorpal": "^1.3.27"
   },
   "devDependencies": {
+    "blanket": "^1.1.9",
     "chai": "^3.4.0",
     "mocha": "^2.3.3",
     "xo": "^0.10.0"
@@ -49,5 +50,15 @@
       "node",
       "mocha"
     ]
+  },
+  "config": {
+    "blanket": {
+      "pattern": [
+        "index.js",
+        "cli.js",
+        "lib"
+      ],
+       "data-cover-never": [ "node_modules"]
+    }
   }
 }
