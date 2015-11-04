@@ -54,3 +54,5 @@ vorpal
 			callback();
 		}, args);
 	});
+
+vorpal.parse(process.argv);
