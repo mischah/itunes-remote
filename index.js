@@ -6,6 +6,7 @@ var search = require('./lib/search');
 var play = require('./lib/play');
 var pause = require('./lib/pause');
 var stop = require('./lib/stop');
+var next = require('./lib/next');
 var logSymbols = require('log-symbols');
 var chalk = require('chalk');
 
@@ -41,6 +42,19 @@ function pausePlayback(callback) {
 		var result;
 		if (err === null) {
 			result = callback(logSymbols.success + ' Paused playing ♪♬');
+		} else {
+			result = callback(logSymbols.error + ' ' + chalk.red(err));
+		}
+		return result;
+	});
+}
+
+function nextTrack(callback) {
+	// Run JavaScript file through OSA
+	osascript(stringify(next.method), function (err) {
+		var result;
+		if (err === null) {
+			result = callback(logSymbols.success + ' Skipped track.');
 		} else {
 			result = callback(logSymbols.error + ' ' + chalk.red(err));
 		}
@@ -100,6 +114,11 @@ module.exports = function (command, callback, args) {
 			break;
 		case 'pause':
 			pausePlayback(function (response) {
+				return callback(response);
+			});
+			break;
+		case 'next':
+			nextTrack(function (response) {
 				return callback(response);
 			});
 			break;

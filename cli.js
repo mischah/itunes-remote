@@ -44,15 +44,26 @@ vorpal
 	});
 
 vorpal
+	.command('next', 'Advance to the next track in the current playlist.')
+	.action(function (args, callback) {
+		var self = this;
+		self.log('Hold on …');
+		itunesRemote('next', function (response) {
+			self.log(response);
+			callback();
+		});
+	});
+
+vorpal
 	.command('search <searchterm>', 'Fuzzy search album, artists and songs.')
 	.option('-d, --dont-play', 'Prevent playing the search result.')
 	.action(function (args, callback) {
 		var self = this;
-		var frames = [' ', ' ', '.', '..', '...', '....', '.....'];
+		var frames = [' ', ' ', '…', '……', '………', '…………', '……………'];
 		var i = 0;
 		var waiting = setInterval(function () {
 			var frame = frames[i = ++i % frames.length];
-			vorpal.ui.redraw('Hold on. ' + frame);
+			vorpal.ui.redraw('Hold on …' + frame);
 		}, 250);
 		itunesRemote('search', function (response) {
 			clearInterval(waiting);
