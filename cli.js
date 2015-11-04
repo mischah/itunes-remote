@@ -48,8 +48,15 @@ vorpal
 	.option('-d, --dont-play', 'Prevent playing the search result.')
 	.action(function (args, callback) {
 		var self = this;
-		self.log('Hold on …');
+		var frames = [' ', ' ','.',  '..', '...', '....', '.....'];
+		var i = 0;
+		var waiting = setInterval(function() {
+			var frame = frames[i = ++i % frames.length];
+			vorpal.ui.redraw('Hold on. ' + frame);
+		}, 250);
 		itunesRemote('search', function (response) {
+			clearInterval(waiting);
+			vorpal.ui.redraw.done();
 			self.log(response);
 			callback();
 		}, args);
