@@ -2,17 +2,14 @@
 
 var osascript = require('osascript').eval;
 var stringify = require('js-function-string');
-var search = require('./lib/search');
-var play = require('./lib/play');
-var pause = require('./lib/pause');
-var stop = require('./lib/stop');
-var next = require('./lib/next');
 var logSymbols = require('log-symbols');
 var chalk = require('chalk');
+var requireDir = require('require-dir');
+var lib = requireDir('./lib');
 
 function startPlayback(callback) {
 	// Run JavaScript file through OSA
-	osascript(stringify(play.method), function (err) {
+	osascript(stringify(lib.play.method), function (err) {
 		var result;
 		if (err === null) {
 			result = callback(logSymbols.success + ' Playing ♪♬');
@@ -25,7 +22,7 @@ function startPlayback(callback) {
 
 function stopPlayback(callback) {
 	// Run JavaScript file through OSA
-	osascript(stringify(stop.method), function (err) {
+	osascript(stringify(lib.stop.method), function (err) {
 		var result;
 		if (err === null) {
 			result = callback(logSymbols.success + ' Stopped playing ♪♬');
@@ -38,7 +35,7 @@ function stopPlayback(callback) {
 
 function pausePlayback(callback) {
 	// Run JavaScript file through OSA
-	osascript(stringify(pause.method), function (err) {
+	osascript(stringify(lib.pause.method), function (err) {
 		var result;
 		if (err === null) {
 			result = callback(logSymbols.success + ' Paused playing ♪♬');
@@ -51,7 +48,7 @@ function pausePlayback(callback) {
 
 function nextTrack(callback) {
 	// Run JavaScript file through OSA
-	osascript(stringify(next.method), function (err) {
+	osascript(stringify(lib.next.method), function (err) {
 		var result;
 		if (err === null) {
 			result = callback(logSymbols.success + ' Skipped track.');
@@ -64,7 +61,7 @@ function nextTrack(callback) {
 
 function startPlaylist(playlist, amount, callback) {
 	// Run JavaScript file through OSA
-	osascript(stringify(play.method).replace(/{{playlist}}/, playlist), function (err) {
+	osascript(stringify(lib.play.method).replace(/{{playlist}}/, playlist), function (err) {
 		var result;
 		if (err === null) {
 			result = callback(logSymbols.success + ' Playing ' + amount + ' song(s) ♪♬');
@@ -77,7 +74,7 @@ function startPlaylist(playlist, amount, callback) {
 
 function startSearch(searchTerm, opts, callback) {
 	// Run JavaScript file through OSA
-	osascript(stringify(search.method).replace(/{{searchTerm}}/, searchTerm), function (err, data) {
+	osascript(stringify(lib.search.method).replace(/{{searchTerm}}/, searchTerm), function (err, data) {
 		data = data.split(',');
 		var playlist = data[0];
 		var amount = parseInt(data[1], 10);

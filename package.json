@@ -37,6 +37,7 @@
     "js-function-string": "^1.0.0",
     "log-symbols": "^1.0.2",
     "osascript": "^1.1.0",
+    "require-dir": "^0.3.0",
     "vorpal": "^1.3.27"
   },
   "devDependencies": {
@@ -58,7 +59,9 @@
         "cli.js",
         "lib"
       ],
-       "data-cover-never": [ "node_modules"]
+      "data-cover-never": [
+        "node_modules"
+      ]
     }
   }
 }
