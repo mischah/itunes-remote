@@ -12,6 +12,7 @@ vorpal.find('exit').description('Exit itunes-remote.');
 
 vorpal
 	.command('play', 'Start playing the current selection')
+	.alias('start')
 	.action(function (args, callback) {
 		var self = this;
 		self.log('Hold on …');
@@ -49,6 +50,18 @@ vorpal
 		var self = this;
 		self.log('Hold on …');
 		itunesRemote('next', function (response) {
+			self.log(response);
+			callback();
+		});
+	});
+
+vorpal
+	.command('previous', 'Return to the previous track in the current playlist.')
+	.alias('prev')
+	.action(function (args, callback) {
+		var self = this;
+		self.log('Hold on …');
+		itunesRemote('previous', function (response) {
 			self.log(response);
 			callback();
 		});

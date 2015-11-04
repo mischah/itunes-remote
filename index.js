@@ -59,6 +59,19 @@ function nextTrack(callback) {
 	});
 }
 
+function prevTrack(callback) {
+	// Run JavaScript file through OSA
+	osascript(stringify(lib.previous.method), function (err) {
+		var result;
+		if (err === null) {
+			result = callback(logSymbols.success + ' Returned to previous track.');
+		} else {
+			result = callback(logSymbols.error + ' ' + chalk.red(err));
+		}
+		return result;
+	});
+}
+
 function startPlaylist(playlist, amount, callback) {
 	// Run JavaScript file through OSA
 	osascript(stringify(lib.play.method).replace(/{{playlist}}/, playlist), function (err) {
@@ -116,6 +129,11 @@ module.exports = function (command, callback, args) {
 			break;
 		case 'next':
 			nextTrack(function (response) {
+				return callback(response);
+			});
+			break;
+		case 'previous':
+			prevTrack(function (response) {
 				return callback(response);
 			});
 			break;
