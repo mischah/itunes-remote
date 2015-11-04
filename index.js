@@ -99,8 +99,22 @@ function startPlaylist(playlist, amount, callback) {
 }
 
 function startSearch(searchTerm, opts, callback) {
+	var limitTo = 'all';
+
+	if (opts.songs) {
+		limitTo = 'songs';
+	}
+	if (opts.artists) {
+		limitTo = 'artists';
+	}
+	if (opts.albums) {
+		limitTo = 'albums';
+	}
+
 	// Run JavaScript file through OSA
-	osascript(stringify(lib.search.method).replace(/{{searchTerm}}/, searchTerm), function (err, data) {
+	osascript(stringify(lib.search.method)
+		.replace(/{{searchTerm}}/, searchTerm)
+		.replace(/{{limitTo}}/, limitTo), function (err, data) {
 		data = data.split(',');
 		var playlist = data[0];
 		var amount = parseInt(data[1], 10);
@@ -156,7 +170,6 @@ module.exports = function (command, callback, args) {
 			});
 			break;
 		case 'search':
-			// console.log(args);
 			startSearch(args.searchterm, args.options, function (response) {
 				return callback(response);
 			});
