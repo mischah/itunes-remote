@@ -4,6 +4,21 @@
 var vorpal = require('vorpal')();
 var itunesRemote = require('./');
 
+function startWaitingIndicator () {
+	var frames = [' ', ' ', '…', '……', '………', '…………', '……………'];
+	var i = 0;
+	var intervalId = setInterval(function () {
+		var frame = frames[i = ++i % frames.length];
+		vorpal.ui.redraw('Hold on …' + frame);
+	}, 250);
+	return intervalId;
+}
+
+function stopWaitingIndicator (intervalId) {
+	clearInterval(intervalId);
+	vorpal.ui.redraw.done();
+}
+
 vorpal
 	.delimiter('iTunes:')
 	.show();
@@ -86,15 +101,9 @@ vorpal
 	.option('-d, --dont-play', 'Prevent playing the search result.')
 	.action(function (args, callback) {
 		var self = this;
-		var frames = [' ', ' ', '…', '……', '………', '…………', '……………'];
-		var i = 0;
-		var waiting = setInterval(function () {
-			var frame = frames[i = ++i % frames.length];
-			vorpal.ui.redraw('Hold on …' + frame);
-		}, 250);
+		var searchIndicator = startWaitingIndicator();
 		itunesRemote('search', function (response) {
-			clearInterval(waiting);
-			vorpal.ui.redraw.done();
+			stopWaitingIndicator(searchIndicator);
 			self.log(response);
 			callback();
 		}, args);
@@ -104,18 +113,11 @@ vorpal
 	.command('play artist', 'Plays songs by an artist.')
 	.action(function (args, callback) {
 		var self = this;
-		var frames = [' ', ' ', '…', '……', '………', '…………', '……………'];
-		var i = 0;
-		var waiting = setInterval(function () {
-			var frame = frames[i = ++i % frames.length];
-			vorpal.ui.redraw('Hold on …' + frame);
-		}, 250);
+		var getDataIndicator = startWaitingIndicator('getData');
 
 		itunesRemote('getData', function (response) {
 			var artists = [];
-
-			clearInterval(waiting);
-			vorpal.ui.redraw.done();
+			stopWaitingIndicator(getDataIndicator);
 			artists = JSON.parse(response).uniqueArtists;
 
 			self.prompt({
@@ -125,15 +127,9 @@ vorpal
 				choices: artists
 			}, function (result) {
 				var selectedArtist = result.artist;
-				var frames = [' ', ' ', '…', '……', '………', '…………', '……………'];
-				var i = 0;
-				var waiting = setInterval(function () {
-					var frame = frames[i = ++i % frames.length];
-					vorpal.ui.redraw('Hold on …' + frame);
-				}, 250);
+				var searchArtistIndicator = startWaitingIndicator();
 				itunesRemote('search', function (response) {
-					clearInterval(waiting);
-					vorpal.ui.redraw.done();
+					stopWaitingIndicator(searchArtistIndicator);
 					self.log(response);
 					callback();
 				}, {
