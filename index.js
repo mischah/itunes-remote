@@ -6,6 +6,10 @@ var logSymbols = require('log-symbols');
 var chalk = require('chalk');
 var requireDir = require('require-dir');
 var lib = requireDir('./lib');
+var osascriptOpts = {
+	type: 'JavaScript',
+	args: ['-s', 's']
+};
 
 function startPlayback(callback) {
 	// Run JavaScript file through OSA
@@ -100,22 +104,26 @@ function startPlaylist(playlist, amount, callback) {
 
 function startSearch(searchTerm, opts, callback) {
 	var limitTo = 'all';
+	var messagePart = 'songs, albums and artists containing ”';
 
 	if (opts.songs) {
 		limitTo = 'songs';
+		messagePart = 'songs containing ”';
 	}
 	if (opts.artists) {
 		limitTo = 'artists';
+		messagePart = 'songs by ”';
 	}
 	if (opts.albums) {
 		limitTo = 'albums';
+		messagePart = 'album containing ”';
 	}
 
 	// Run JavaScript file through OSA
 	osascript(stringify(lib.search.method)
-		.replace(/{{searchTerm}}/, searchTerm)
-		.replace(/{{limitTo}}/, limitTo), function (err, data) {
-		data = data.split(',');
+	.replace(/{{searchTerm}}/, searchTerm)
+	.replace(/{{limitTo}}/, limitTo), osascriptOpts, function (err, data) {
+		data = JSON.parse(data);
 		var playlist = data[0];
 		var amount = parseInt(data[1], 10);
 		var result;
@@ -125,11 +133,24 @@ function startSearch(searchTerm, opts, callback) {
 					result = callback(response);
 				});
 			}
-			result = callback(logSymbols.success + ' Found songs, albums and artists containing ”' +
+			result = callback(logSymbols.success + ' Found ' + messagePart +
 				chalk.inverse(searchTerm) + '“ and generated a temporary playlist');
 		} else if (err === null) {
-			result = callback(logSymbols.error + ' Oops. Found 0 songs, albums and artists containing ”' +
+			result = callback(logSymbols.error + ' Oops. Found 0 ' + messagePart +
 				chalk.inverse(searchTerm) + '“.');
+		} else {
+			result = callback(logSymbols.error + ' ' + chalk.red(err));
+		}
+		return result;
+	});
+}
+
+function getData(callback) {
+	// Run JavaScript file through OSA
+	osascript(stringify(lib.getLibraryData.method), osascriptOpts, function (err, data) {
+		var result;
+		if (err === null) {
+			result = callback(data);
 		} else {
 			result = callback(logSymbols.error + ' ' + chalk.red(err));
 		}
@@ -171,6 +192,11 @@ module.exports = function (command, callback, args) {
 			break;
 		case 'search':
 			startSearch(args.searchterm, args.options, function (response) {
+				return callback(response);
+			});
+			break;
+		case 'getData':
+			getData(function (response) {
 				return callback(response);
 			});
 			break;

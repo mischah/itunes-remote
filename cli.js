@@ -100,4 +100,48 @@ vorpal
 		}, args);
 	});
 
+vorpal
+	.command('play artist', 'Plays songs by an artist.')
+	.action(function (args, callback) {
+		var self = this;
+		var frames = [' ', ' ', '…', '……', '………', '…………', '……………'];
+		var i = 0;
+		var waiting = setInterval(function () {
+			var frame = frames[i = ++i % frames.length];
+			vorpal.ui.redraw('Hold on …' + frame);
+		}, 250);
+
+		itunesRemote('getData', function (response) {
+			var artists = [];
+
+			clearInterval(waiting);
+			vorpal.ui.redraw.done();
+			artists = JSON.parse(response).uniqueArtists;
+
+			self.prompt({
+				type: 'list',
+				name: 'artist',
+				message: 'Choose an artist',
+				choices: artists
+			}, function (result) {
+				var selectedArtist = result.artist;
+				var frames = [' ', ' ', '…', '……', '………', '…………', '……………'];
+				var i = 0;
+				var waiting = setInterval(function () {
+					var frame = frames[i = ++i % frames.length];
+					vorpal.ui.redraw('Hold on …' + frame);
+				}, 250);
+				itunesRemote('search', function (response) {
+					clearInterval(waiting);
+					vorpal.ui.redraw.done();
+					self.log(response);
+					callback();
+				}, {
+					searchterm: selectedArtist,
+					options: {artists: true}
+				});
+			});
+		});
+	});
+
 vorpal.parse(process.argv);
