@@ -6,8 +6,19 @@
 
 # itunes-remote
 
-> Control iTunes via your terminal
+> Control iTunes via your terminal :notes:
 
+Using [JXA](https://developer.apple.com/library/mac/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/Introduction.html) via [osascript](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/osascript.1.html) via Node.js :speech_balloon:
+
+## Requirements
+
+- Node.js (v0.12.7 or greater)
+- Mac OS X (El Capitan 10.11.0 or greater)
+	- Might work with Yosemite (Feedback appreciated)
+- Some tracks in your iTunes library
+
+## Demo
+![demo](demo.gif)
 
 ## Install
 
@@ -19,35 +30,28 @@ $ npm install --global itunes-remote
 ## Usage
 
 ```
-$ itunes-remote --help
+$ itunes-remote help
+iTunes: 
 
-  Usage
-    $ itunes-remote [<artist|album|song> ...]
-  
-  Options
-    --play   Start playing the current selection or search result. [Default: true]',
-    --stop   Stop playing the current selection or prevent playing the current search result. [Default: false]',
-    --pause  Pause playing the current selection. [Default: false]',
-  
-  Examples
-    $ itunes-remote nicknack',
-    Hold on …',
-    ✔ Found songs, albums and artists containing ”nicknack“ and generated a temporary playlist',
-    ✔ Playing 44 song(s) ♪♬',
+  Commands:
 
-    $  itunes-remote --pause',
-    Hold on …',
-    ✔ Paused playing ♪♬',
+    help [command]                 Provides help for a given command.
+    exit [options]                 Exit itunes-remote.
+    play                           Start playing the current selection
+    stop                           Stop playing the current selection
+    pause                          Pause playing the current selection
+    next                           Advance to the next track in the current playlist.
+    previous                       Return to the previous track in the current playlist.
+    back                           Reposition to beginning of current track or go to previous track if already at start of current track.
+    search [options] <searchterm>  Fuzzy search album, artists and songs.
 
-    $  itunes-remote --play',
-    Hold on …',
-    ✔ Playing ♪♬',
+  Command Groups:
 
-    $ itunes-remote emancipator --stop',
-    Hold on …',
-    ✔ Found songs, albums and artists containing ”emancipator“ and generated a temporary playlist'
+    play *                         1 sub-command.
+
+iTunes: 
+
 ```
-
 
 ## License
 
