@@ -7,8 +7,7 @@ var chalk = require('chalk');
 var requireDir = require('require-dir');
 var lib = requireDir('./lib');
 var osascriptOpts = {
-	type: 'JavaScript',
-	args: ['-s', 's']
+	flags: ['-s', 's']
 };
 
 function startPlayback(callback) {
