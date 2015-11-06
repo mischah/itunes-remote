@@ -36,7 +36,7 @@
     "chalk": "^1.1.1",
     "js-function-string": "^1.0.0",
     "log-symbols": "^1.0.2",
-    "osascript": "^1.1.0",
+    "osascript": "github:mischah/node-osascript#b53e1b8",
     "require-dir": "^0.3.0",
     "vorpal": "^1.3.27"
   },
