@@ -4,7 +4,7 @@
 var vorpal = require('vorpal')();
 var itunesRemote = require('./');
 
-function startWaitingIndicator () {
+function startWaitingIndicator() {
 	var frames = [' ', ' ', '…', '……', '………', '…………', '……………'];
 	var i = 0;
 	var intervalId = setInterval(function () {
@@ -14,7 +14,7 @@ function startWaitingIndicator () {
 	return intervalId;
 }
 
-function stopWaitingIndicator (intervalId) {
+function stopWaitingIndicator(intervalId) {
 	clearInterval(intervalId);
 	vorpal.ui.redraw.done();
 }
