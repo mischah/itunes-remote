@@ -47,7 +47,7 @@ iTunes:
 
   Command Groups:
 
-    play *                         1 sub-command.
+    play *                         2 sub-commands.
 
 iTunes: 
 

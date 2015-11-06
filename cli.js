@@ -140,4 +140,35 @@ vorpal
 		});
 	});
 
+vorpal
+	.command('play album', 'Plays an album.')
+	.action(function (args, callback) {
+		var self = this;
+		var getDataIndicator = startWaitingIndicator('getData');
+
+		itunesRemote('getData', function (response) {
+			var artists = [];
+			stopWaitingIndicator(getDataIndicator);
+			artists = JSON.parse(response).uniqueAlbums;
+
+			self.prompt({
+				type: 'list',
+				name: 'album',
+				message: 'Choose an album',
+				choices: artists
+			}, function (result) {
+				var selectedAlbum = result.album;
+				var searchAlbumIndicator = startWaitingIndicator();
+				itunesRemote('search', function (response) {
+					stopWaitingIndicator(searchAlbumIndicator);
+					self.log(response);
+					callback();
+				}, {
+					searchterm: selectedAlbum,
+					options: {albums: true}
+				});
+			});
+		});
+	});
+
 vorpal.parse(process.argv);
