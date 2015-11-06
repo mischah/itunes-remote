@@ -29,9 +29,11 @@ $ npm install --global itunes-remote
 
 ## Usage
 
+It’s interactive and offering an own prompt.
+
 ```
-$ itunes-remote help
-iTunes: 
+$ itunes-remote
+iTunes: help
 
   Commands:
 
@@ -50,8 +52,19 @@ iTunes:
     play *                         2 sub-commands.
 
 iTunes: 
+```
+
+But you also can pass command line arguments to quickly start a search with starting the CLI:
 
 ```
+$ itunes-remote search nicknack -artist
+iTunes: 
+Hold on … 
+✔ Found songs by ”nicknack“ and generated a temporary playlist
+✔ Playing 44 song(s) ♪♬
+iTunes: 
+```
+
 
 ## License
 
