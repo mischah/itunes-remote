@@ -65,6 +65,10 @@ Hold on …
 iTunes: 
 ```
 
+## Thanks
+Special shoutout to [@dthree](https://github.com/dthree) for his nice way to offer support for [vorpal](https://github.com/dthree/vorpal) :blush:
+
+This tiny little module wouldn‘t be possible without the work of [all these amazing humans](thanks.md). Thanks. 
 
 ## License
 
