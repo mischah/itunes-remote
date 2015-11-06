@@ -1,6 +1,6 @@
 {
   "name": "itunes-remote",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Control iTunes via CLI",
   "license": "MIT",
   "repository": "mischah/itunes-remote",
