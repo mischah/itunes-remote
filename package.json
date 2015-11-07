@@ -14,7 +14,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "xo && mocha --require blanket -R html-cov > coverage.html"
+    "test": "xo && mocha -r blanket -R html-cov > coverage.html"
   },
   "files": [
     "index.js",
@@ -43,7 +43,9 @@
   "devDependencies": {
     "blanket": "^1.1.9",
     "chai": "^3.4.0",
+    "coveralls": "^2.11.4",
     "mocha": "^2.3.3",
+    "mocha-lcov-reporter": "^1.0.0",
     "xo": "^0.10.0"
   },
   "xo": {
