@@ -14,7 +14,9 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "xo && mocha -r blanket -R html-cov > coverage.html"
+    "test": "xo && mocha",
+    "coverage": "mocha -r blanket -R html-cov > coverage.html",
+    "coveralls": "NODE_ENV=test YOURPACKAGE_COVERAGE=1 ./node_modules/.bin/mocha --require blanket --reporter mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js"
   },
   "files": [
     "index.js",
