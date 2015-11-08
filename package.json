@@ -16,7 +16,7 @@
   "scripts": {
     "lint": "xo",
     "test": "mocha",
-    "posttest": "npm run lint",
+    "posttest": "npm run lint && npm run coverage",
     "coverage": "mocha -r blanket -R html-cov > coverage.html",
     "coveralls": "NODE_ENV=test YOURPACKAGE_COVERAGE=1 mocha --require blanket --reporter mocha-lcov-reporter | coveralls"
   },
@@ -66,7 +66,8 @@
         "lib"
       ],
       "data-cover-never": [
-        "node_modules"
+        "node_modules",
+        "lib"
       ]
     }
   }
