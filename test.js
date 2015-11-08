@@ -64,12 +64,48 @@ describe('itunesRemote', function () {
 	});
 
 	describe('command `search`', function () {
-		it('should return error message when no search results.', function (done) {
+		this.timeout(15000);
+
+		it('should return success message', function (done) {
+			this.timeout(15000);
+			setTimeout(done, 15000);
+			itunesRemote('search', function (response) {
+				expect(response).to.equal(logSymbols.success + ' Found songs by ”' +
+				chalk.inverse('emancipator') + '“ and generated a temporary playlist');
+				done();
+			}, {searchterm: 'emancipator', options: {dontplay: true, artists: true}}
+			);
+		});
+		it('should return error message when no search results for all', function (done) {
 			itunesRemote('search', function (response) {
 				expect(response).to.equal(logSymbols.error + ' Oops. Found 0 songs, albums and artists containing ”' +
 				chalk.inverse('foozel') + '“.');
 				done();
 			}, {searchterm: 'foozel', options: {}}
+			);
+		});
+		it('should return error message when no search results for albums', function (done) {
+			itunesRemote('search', function (response) {
+				expect(response).to.equal(logSymbols.error + ' Oops. Found 0 album containing ”' +
+				chalk.inverse('foozel') + '“.');
+				done();
+			}, {searchterm: 'foozel', options: {albums: true}}
+			);
+		});
+		it('should return error message when no search results for songs', function (done) {
+			itunesRemote('search', function (response) {
+				expect(response).to.equal(logSymbols.error + ' Oops. Found 0 songs containing ”' +
+				chalk.inverse('foozel') + '“.');
+				done();
+			}, {searchterm: 'foozel', options: {songs: true}}
+			);
+		});
+		it('should return error message when no search results for artists', function (done) {
+			itunesRemote('search', function (response) {
+				expect(response).to.equal(logSymbols.error + ' Oops. Found 0 songs by ”' +
+				chalk.inverse('foozel') + '“.');
+				done();
+			}, {searchterm: 'foozel', options: {artists: true}}
 			);
 		});
 	});
