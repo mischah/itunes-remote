@@ -80,7 +80,7 @@ function backTrack(callback) {
 	osascript(stringify(lib.back.method), function (err) {
 		var result;
 		if (err === null) {
-			result = callback(logSymbols.success + ' Returned to previous track or beginning of current track');
+			result = callback(logSymbols.success + ' Returned to previous track or beginning of current track.');
 		} else {
 			result = callback(logSymbols.error + ' ' + chalk.red(err));
 		}
