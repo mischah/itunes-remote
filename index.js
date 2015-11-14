@@ -149,6 +149,7 @@ function getData(callback) {
 	osascript(stringify(lib.getLibraryData.method), osascriptOpts, function (err, data) {
 		var result;
 		if (err === null) {
+			data = JSON.parse(data);
 			result = callback(data);
 		} else {
 			result = callback(logSymbols.error + ' ' + chalk.red(err));

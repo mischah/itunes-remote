@@ -118,7 +118,7 @@ vorpal
 		itunesRemote('getData', function (response) {
 			var artists = [];
 			stopWaitingIndicator(getDataIndicator);
-			artists = JSON.parse(response).uniqueArtists;
+			artists = response.artists;
 
 			self.prompt({
 				type: 'list',
@@ -147,15 +147,15 @@ vorpal
 		var getDataIndicator = startWaitingIndicator('getData');
 
 		itunesRemote('getData', function (response) {
-			var artists = [];
+			var albums = [];
 			stopWaitingIndicator(getDataIndicator);
-			artists = JSON.parse(response).uniqueAlbums;
+			albums = response.albums;
 
 			self.prompt({
 				type: 'list',
 				name: 'album',
 				message: 'Choose an album',
-				choices: artists
+				choices: albums
 			}, function (result) {
 				var selectedAlbum = result.album;
 				var searchAlbumIndicator = startWaitingIndicator();
