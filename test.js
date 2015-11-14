@@ -113,7 +113,7 @@ describe('itunesRemote', function () {
 	describe('command `getData`', function () {
 		it('should return an object.', function (done) {
 			itunesRemote('getData', function (response) {
-				expect(JSON.parse(response)).to.be.an('object');
+				expect(response).to.be.an('object');
 				done();
 			});
 		});
