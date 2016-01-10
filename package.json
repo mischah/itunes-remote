@@ -10,6 +10,7 @@
     "url": "http://michael-kuehnel.de"
   },
   "bin": "cli.js",
+  "preferGlobal": true,
   "engines": {
     "node": ">=0.10.0"
   },
