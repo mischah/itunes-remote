@@ -93,7 +93,7 @@ function startPlaylist(playlist, amount, callback) {
 	osascript(stringify(lib.play.method).replace(/{{playlist}}/, playlist), function (err) {
 		var result;
 		if (err === null) {
-			result = callback(logSymbols.success + ' Playing ' + amount + ' song(s) ♪♬');
+			result = callback(logSymbols.success + ' Playing ' + amount + ' song' + ( amount > 1 ? 's' : '') + ' ♪♬');
 		} else {
 			result = callback(logSymbols.error + ' ' + chalk.red(err));
 		}
