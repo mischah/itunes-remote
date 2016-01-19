@@ -44,15 +44,15 @@
     "log-symbols": "^1.0.2",
     "osascript": "^1.2.0",
     "require-dir": "^0.3.0",
-    "vorpal": "^1.3.27"
+    "vorpal": "^1.5.5"
   },
   "devDependencies": {
-    "blanket": "^1.1.9",
-    "chai": "^3.4.0",
-    "coveralls": "^2.11.4",
-    "mocha": "^2.3.3",
+    "blanket": "^1.2.1",
+    "chai": "^3.4.1",
+    "coveralls": "^2.11.6",
+    "mocha": "^2.3.4",
     "mocha-lcov-reporter": "^1.0.0",
-    "xo": "^0.10.0"
+    "xo": "^0.12.1"
   },
   "xo": {
     "envs": [
