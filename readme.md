@@ -13,8 +13,7 @@ Using [JXA](https://developer.apple.com/library/mac/releasenotes/Interapplicatio
 ## Requirements
 
 - Node.js (v0.12.7 or greater)
-- Mac OS X (El Capitan 10.11.0 or greater)
-	- Might work with Yosemite (Feedback appreciated)
+- Mac OS X (Yosemite 10.10.0 or greater)
 - Some tracks in your iTunes library
 
 ## Demo
