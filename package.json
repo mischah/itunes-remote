@@ -39,20 +39,20 @@
     "OS X"
   ],
   "dependencies": {
-    "chalk": "1.1.1",
+    "chalk": "2.0.1",
     "js-function-string": "1.0.0",
-    "log-symbols": "1.0.2",
+    "log-symbols": "2.0.0",
     "osascript": "1.2.0",
-    "require-dir": "0.3.0",
-    "vorpal": "1.5.5"
+    "require-dir": "0.3.2",
+    "vorpal": "1.12.0"
   },
   "devDependencies": {
-    "blanket": "1.1.9",
-    "chai": "3.4.1",
-    "coveralls": "2.11.6",
-    "mocha": "2.3.4",
-    "mocha-lcov-reporter": "1.0.0",
-    "xo": "0.12.1"
+    "blanket": "1.2.3",
+    "chai": "4.1.0",
+    "coveralls": "2.13.1",
+    "mocha": "3.4.2",
+    "mocha-lcov-reporter": "1.3.0",
+    "xo": "0.18.2"
   },
   "xo": {
     "envs": [
