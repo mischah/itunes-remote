@@ -60,9 +60,15 @@
     ],
     "esnext": false,
     "rules": {
-      "capitalized-comments": ["warn"],
-      "unicorn/filename-case": ["warn"],
-      "array-callback-return": ["warn"]
+      "capitalized-comments": [
+        "warn"
+      ],
+      "unicorn/filename-case": [
+        "warn"
+      ],
+      "array-callback-return": [
+        "warn"
+      ]
     }
   },
   "config": {
