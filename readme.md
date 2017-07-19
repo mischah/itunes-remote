@@ -31,24 +31,23 @@ $ npm install --global itunes-remote
 It’s interactive and offering an own prompt.
 
 ```
-$ itunes-remote
+$ itunes
 iTunes: help
 
   Commands:
 
-    help [command]                 Provides help for a given command.
-    exit [options]                 Exit itunes-remote.
+    help [command...]              Provides help for a given command.
+    exit                           Exit itunes-remote.
     play                           Start playing the current selection
+    play artist                    Plays songs by an artist.
+    play album                     Plays an album.
     stop                           Stop playing the current selection
     pause                          Pause playing the current selection
     next                           Advance to the next track in the current playlist.
     previous                       Return to the previous track in the current playlist.
-    back                           Reposition to beginning of current track or go to previous track if already at start of current track.
+    back                           Reposition to beginning of current track or go to previous track if already at
+                                   start of current track.
     search [options] <searchterm>  Fuzzy search album, artists and songs.
-
-  Command Groups:
-
-    play *                         2 sub-commands.
 
 iTunes: 
 ```
@@ -56,7 +55,7 @@ iTunes:
 But you also can pass command line arguments to quickly start a search with starting the CLI:
 
 ```
-$ itunes-remote search nicknack -artist
+$ itunes search nicknack -artist
 iTunes: 
 Hold on … 
 ✔ Found songs by ”nicknack“ and generated a temporary playlist
