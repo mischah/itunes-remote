@@ -60,7 +60,13 @@
     "envs": [
       "node",
       "mocha"
-    ]
+    ],
+    "esnext": false,
+    "rules": {
+      "capitalized-comments": ["off"],
+      "unicorn/filename-case": ["off"],
+      "array-callback-return": ["off"]
+    }
   },
   "config": {
     "blanket": {

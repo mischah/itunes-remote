@@ -37,67 +37,67 @@ vorpal
 		});
 	});
 
-	vorpal
-		.command('play artist', 'Plays songs by an artist.')
-		.action(function (args, callback) {
-			var self = this;
-			var getDataIndicator = startWaitingIndicator('getData');
+vorpal
+	.command('play artist', 'Plays songs by an artist.')
+	.action(function (args, callback) {
+		var self = this;
+		var getDataIndicator = startWaitingIndicator('getData');
 
-			itunesRemote('getData', function (response) {
-				var artists = [];
-				stopWaitingIndicator(getDataIndicator);
-				artists = response.artists;
+		itunesRemote('getData', function (response) {
+			var artists = [];
+			stopWaitingIndicator(getDataIndicator);
+			artists = response.artists;
 
-				self.prompt({
-					type: 'list',
-					name: 'artist',
-					message: 'Choose an artist',
-					choices: artists
-				}, function (result) {
-					var selectedArtist = result.artist;
-					var searchArtistIndicator = startWaitingIndicator();
-					itunesRemote('search', function (response) {
-						stopWaitingIndicator(searchArtistIndicator);
-						self.log(response);
-						callback();
-					}, {
-						searchterm: selectedArtist,
-						options: {artists: true}
-					});
+			self.prompt({
+				type: 'list',
+				name: 'artist',
+				message: 'Choose an artist',
+				choices: artists
+			}, function (result) {
+				var selectedArtist = result.artist;
+				var searchArtistIndicator = startWaitingIndicator();
+				itunesRemote('search', function (response) {
+					stopWaitingIndicator(searchArtistIndicator);
+					self.log(response);
+					callback();
+				}, {
+					searchterm: selectedArtist,
+					options: {artists: true}
 				});
 			});
 		});
+	});
 
-	vorpal
-		.command('play album', 'Plays an album.')
-		.action(function (args, callback) {
-			var self = this;
-			var getDataIndicator = startWaitingIndicator('getData');
+vorpal
+	.command('play album', 'Plays an album.')
+	.action(function (args, callback) {
+		var self = this;
+		var getDataIndicator = startWaitingIndicator('getData');
 
-			itunesRemote('getData', function (response) {
-				var albums = [];
-				stopWaitingIndicator(getDataIndicator);
-				albums = response.albums;
+		itunesRemote('getData', function (response) {
+			var albums = [];
+			stopWaitingIndicator(getDataIndicator);
+			albums = response.albums;
 
-				self.prompt({
-					type: 'list',
-					name: 'album',
-					message: 'Choose an album',
-					choices: albums
-				}, function (result) {
-					var selectedAlbum = result.album;
-					var searchAlbumIndicator = startWaitingIndicator();
-					itunesRemote('search', function (response) {
-						stopWaitingIndicator(searchAlbumIndicator);
-						self.log(response);
-						callback();
-					}, {
-						searchterm: selectedAlbum,
-						options: {albums: true}
-					});
+			self.prompt({
+				type: 'list',
+				name: 'album',
+				message: 'Choose an album',
+				choices: albums
+			}, function (result) {
+				var selectedAlbum = result.album;
+				var searchAlbumIndicator = startWaitingIndicator();
+				itunesRemote('search', function (response) {
+					stopWaitingIndicator(searchAlbumIndicator);
+					self.log(response);
+					callback();
+				}, {
+					searchterm: selectedAlbum,
+					options: {albums: true}
 				});
 			});
 		});
+	});
 
 vorpal
 	.command('stop', 'Stop playing the current selection')

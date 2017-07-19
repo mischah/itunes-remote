@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
-require('blanket');
-var itunesRemote = require('./');
+require('blanket'); // eslint-disable-line import/no-unassigned-import
 var logSymbols = require('log-symbols');
 var chalk = require('chalk');
+var itunesRemote = require('./');
 
 describe('itunesRemote', function () {
 	it('should throw an error when called without command', function () {

@@ -5,7 +5,9 @@ var stringify = require('js-function-string');
 var logSymbols = require('log-symbols');
 var chalk = require('chalk');
 var requireDir = require('require-dir');
+
 var lib = requireDir('./lib');
+
 var osascriptOpts = {
 	flags: ['-s', 's']
 };
