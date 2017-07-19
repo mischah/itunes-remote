@@ -19,9 +19,6 @@
   "scripts": {
     "lint": "xo",
     "test": "mocha",
-    "preparepublish": "npm run coveralls",
-    "posttest": "npm run lint && npm run coverage",
-    "coverage": "mocha -r blanket -R html-cov > coverage.html",
     "coveralls": "NODE_ENV=test YOURPACKAGE_COVERAGE=1 mocha --require blanket --reporter mocha-lcov-reporter | coveralls"
   },
   "files": [
@@ -63,9 +60,9 @@
     ],
     "esnext": false,
     "rules": {
-      "capitalized-comments": ["off"],
-      "unicorn/filename-case": ["off"],
-      "array-callback-return": ["off"]
+      "capitalized-comments": ["warn"],
+      "unicorn/filename-case": ["warn"],
+      "array-callback-return": ["warn"]
     }
   },
   "config": {
