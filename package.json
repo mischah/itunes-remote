@@ -19,6 +19,10 @@
   "scripts": {
     "lint": "xo",
     "test": "mocha",
+    "release": "standard-version --tag-prefix",
+    "release:patch": "standard-version --tag-prefix --release-as patch",
+    "release:minor": "standard-version --tag-prefix --release-as minor",
+    "release:major": "standard-version --tag-prefix --release-as major",
     "coveralls": "NODE_ENV=test YOURPACKAGE_COVERAGE=1 mocha --require blanket --reporter mocha-lcov-reporter | coveralls"
   },
   "files": [
@@ -52,6 +56,7 @@
     "coveralls": "2.13.1",
     "mocha": "3.4.2",
     "mocha-lcov-reporter": "1.3.0",
+    "standard-version": "^4.2.0",
     "xo": "0.18.2"
   },
   "xo": {
