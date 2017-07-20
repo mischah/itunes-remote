@@ -14,14 +14,17 @@ vorpal
 vorpal.find('exit').description('Exit itunes-remote.');
 
 vorpal
-	.command('play', 'Start playing the current selection')
+	.command('play', 'Start playing the current selection.')
 	.alias('start')
+	.option('-E, --exit', 'exit itunes-remote after executing the command')
 	.action(function (args, callback) {
 		var self = this;
 		var spinner = ora().start();
 		itunesRemote('play', function (response) {
 			spinner.stop();
-			self.log(response);
+			if (args.options.exit) {
+				vorpal.execSync('exit');
+			}
 			callback();
 		});
 	});
@@ -90,36 +93,48 @@ vorpal
 
 vorpal
 	.command('stop', 'Stop playing the current selection')
+	.option('-E, --exit', 'exit itunes-remote after executing the command')
 	.action(function (args, callback) {
 		var self = this;
 		var spinner = ora().start();
 		itunesRemote('stop', function (response) {
 			spinner.stop();
 			self.log(response);
+			if (args.options.exit) {
+				vorpal.execSync('exit');
+			}
 			callback();
 		});
 	});
 
 vorpal
 	.command('pause', 'Pause playing the current selection')
+	.option('-E, --exit', 'exit itunes-remote after executing the command')
 	.action(function (args, callback) {
 		var self = this;
 		var spinner = ora().start();
 		itunesRemote('pause', function (response) {
 			spinner.stop();
 			self.log(response);
+			if (args.options.exit) {
+				vorpal.execSync('exit');
+			}
 			callback();
 		});
 	});
 
 vorpal
 	.command('next', 'Advance to the next track in the current playlist.')
+	.option('-E, --exit', 'exit itunes-remote after executing the command')
 	.action(function (args, callback) {
 		var self = this;
 		var spinner = ora().start();
 		itunesRemote('next', function (response) {
 			spinner.stop();
 			self.log(response);
+			if (args.options.exit) {
+				vorpal.execSync('exit');
+			}
 			callback();
 		});
 	});
@@ -127,34 +142,42 @@ vorpal
 vorpal
 	.command('previous', 'Return to the previous track in the current playlist.')
 	.alias('prev')
+	.option('-E, --exit', 'exit itunes-remote after executing the command')
 	.action(function (args, callback) {
 		var self = this;
 		var spinner = ora().start();
 		itunesRemote('previous', function (response) {
 			spinner.stop();
 			self.log(response);
+			if (args.options.exit) {
+				vorpal.execSync('exit');
+			}
 			callback();
 		});
 	});
 
 vorpal
 	.command('back', 'Reposition to beginning of current track or go to previous track if already at start of current track.')
+	.option('-E, --exit', 'exit itunes-remote after executing the command')
 	.action(function (args, callback) {
 		var self = this;
 		var spinner = ora().start();
 		itunesRemote('back', function (response) {
 			spinner.stop();
 			self.log(response);
+			if (args.options.exit) {
+				vorpal.execSync('exit');
+			}
 			callback();
 		});
 	});
 
 vorpal
 	.command('search <searchterm>', 'Fuzzy search album, artists and songs.')
-	.option('-A, --albums', 'Limit search to albums.')
-	.option('-s, --songs', 'Limit search to songs.')
-	.option('-a, --artists', 'Limit search to artist.')
-	.option('-d, --dont-play', 'Prevent playing the search result.')
+	.option('-A, --albums', 'Limit search to albums')
+	.option('-s, --songs', 'Limit search to songs')
+	.option('-a, --artists', 'Limit search to artist')
+	.option('-d, --dont-play', 'Prevent playing the search result')
 	.action(function (args, callback) {
 		var self = this;
 		var spinner = ora('Searching …').start();

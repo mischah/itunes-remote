@@ -52,15 +52,14 @@ iTunes: help
 iTunes: 
 ```
 
-But you also can pass command line arguments to quickly start a search with starting the CLI:
+**Note:**  
+You can also pass commands and options from the outside.
 
 ```
-$ itunes search nicknack -artist
-iTunes: 
-Hold on … 
-✔ Found songs by ”nicknack“ and generated a temporary playlist
-✔ Playing 44 song(s) ♪♬
-iTunes: 
+$ itunes stop --exit
+iTunes:
+✔ Stopped playing ♪♬
+$
 ```
 
 ## Thanks
