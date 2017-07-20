@@ -2,22 +2,9 @@
 'use strict';
 
 var vorpal = require('vorpal')();
+var ora = require('ora');
+var chalk = require('chalk');
 var itunesRemote = require('./');
-
-function startWaitingIndicator() {
-	var frames = [' ', ' ', '…', '……', '………', '…………', '……………'];
-	var i = 0;
-	var intervalId = setInterval(function () {
-		var frame = frames[i = ++i % frames.length];
-		vorpal.ui.redraw('Hold on …' + frame);
-	}, 250);
-	return intervalId;
-}
-
-function stopWaitingIndicator(intervalId) {
-	clearInterval(intervalId);
-	vorpal.ui.redraw.done();
-}
 
 vorpal
 	.delimiter('iTunes:')
@@ -30,8 +17,9 @@ vorpal
 	.alias('start')
 	.action(function (args, callback) {
 		var self = this;
-		self.log('Hold on …');
+		var spinner = ora().start();
 		itunesRemote('play', function (response) {
+			spinner.stop();
 			self.log(response);
 			callback();
 		});
@@ -41,11 +29,11 @@ vorpal
 	.command('play artist', 'Plays songs by an artist.')
 	.action(function (args, callback) {
 		var self = this;
-		var getDataIndicator = startWaitingIndicator('getData');
+		var spinner = ora('Getting artists').start();
 
 		itunesRemote('getData', function (response) {
 			var artists = [];
-			stopWaitingIndicator(getDataIndicator);
+			spinner.stop();
 			artists = response.artists;
 
 			self.prompt({
@@ -55,9 +43,9 @@ vorpal
 				choices: artists
 			}, function (result) {
 				var selectedArtist = result.artist;
-				var searchArtistIndicator = startWaitingIndicator();
+				var spinner = ora('Searching for songs by ' + chalk.blue(result.artist)).start();
 				itunesRemote('search', function (response) {
-					stopWaitingIndicator(searchArtistIndicator);
+					spinner.stop();
 					self.log(response);
 					callback();
 				}, {
@@ -72,11 +60,11 @@ vorpal
 	.command('play album', 'Plays an album.')
 	.action(function (args, callback) {
 		var self = this;
-		var getDataIndicator = startWaitingIndicator('getData');
+		var spinner = ora('Getting albums').start();
 
 		itunesRemote('getData', function (response) {
 			var albums = [];
-			stopWaitingIndicator(getDataIndicator);
+			spinner.stop();
 			albums = response.albums;
 
 			self.prompt({
@@ -86,9 +74,9 @@ vorpal
 				choices: albums
 			}, function (result) {
 				var selectedAlbum = result.album;
-				var searchAlbumIndicator = startWaitingIndicator();
+				var spinner = ora('Searching for albums named ' + chalk.blue(result.album)).start();
 				itunesRemote('search', function (response) {
-					stopWaitingIndicator(searchAlbumIndicator);
+					spinner.stop();
 					self.log(response);
 					callback();
 				}, {
@@ -103,8 +91,9 @@ vorpal
 	.command('stop', 'Stop playing the current selection')
 	.action(function (args, callback) {
 		var self = this;
-		self.log('Hold on …');
+		var spinner = ora().start();
 		itunesRemote('stop', function (response) {
+			spinner.stop();
 			self.log(response);
 			callback();
 		});
@@ -114,8 +103,9 @@ vorpal
 	.command('pause', 'Pause playing the current selection')
 	.action(function (args, callback) {
 		var self = this;
-		self.log('Hold on …');
+		var spinner = ora().start();
 		itunesRemote('pause', function (response) {
+			spinner.stop();
 			self.log(response);
 			callback();
 		});
@@ -125,8 +115,9 @@ vorpal
 	.command('next', 'Advance to the next track in the current playlist.')
 	.action(function (args, callback) {
 		var self = this;
-		self.log('Hold on …');
+		var spinner = ora().start();
 		itunesRemote('next', function (response) {
+			spinner.stop();
 			self.log(response);
 			callback();
 		});
@@ -137,8 +128,9 @@ vorpal
 	.alias('prev')
 	.action(function (args, callback) {
 		var self = this;
-		self.log('Hold on …');
+		var spinner = ora().start();
 		itunesRemote('previous', function (response) {
+			spinner.stop();
 			self.log(response);
 			callback();
 		});
@@ -148,8 +140,9 @@ vorpal
 	.command('back', 'Reposition to beginning of current track or go to previous track if already at start of current track.')
 	.action(function (args, callback) {
 		var self = this;
-		self.log('Hold on …');
+		var spinner = ora().start();
 		itunesRemote('back', function (response) {
+			spinner.stop();
 			self.log(response);
 			callback();
 		});
@@ -163,9 +156,9 @@ vorpal
 	.option('-d, --dont-play', 'Prevent playing the search result.')
 	.action(function (args, callback) {
 		var self = this;
-		var searchIndicator = startWaitingIndicator();
+		var spinner = ora('Searching …').start();
 		itunesRemote('search', function (response) {
-			stopWaitingIndicator(searchIndicator);
+			spinner.stop();
 			self.log(response);
 			callback();
 		}, args);
