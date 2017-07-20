@@ -129,7 +129,7 @@ function startSearch(searchTerm, opts, callback) {
 		var amount = parseInt(data[1], 10);
 		var result;
 		if (err === null && amount) {
-			if (!opts.dontplay) {
+			if (!opts['dont-play']) {
 				startPlaylist(playlist, amount, function (response) {
 					result = callback(response);
 				});
