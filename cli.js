@@ -7,6 +7,7 @@ var chalk = require('chalk');
 var itunesRemote = require('./');
 
 vorpal
+	.history('itunes-remote')
 	.delimiter('iTunes:')
 	.show();
 
