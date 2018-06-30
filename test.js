@@ -141,7 +141,7 @@ describe('itunesRemote', function () {
 				expect(response).to.an('object');
 				expect(response.outputNames).to.an('array');
 				done();
-			}, { volume: '75' });
+			});
 		});
 	});
 });
