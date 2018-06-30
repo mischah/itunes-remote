@@ -160,6 +160,36 @@ function getData(callback) {
 	});
 }
 
+function setOutputs(outputName, options, callback) {
+	var command = stringify(lib.setOutput.method)
+		.replace(/{{outputName}}/, outputName)
+		.replace(/{{clearOthers}}/, options.clear ? true : '');
+	osascript(command, osascriptOpts, function (err, data) {
+		var result;
+		if (!err) {
+			result = callback('Outputs set to: ' + data);
+		} else {
+			result = callback(logSymbols.error + ' ' + chalk.red(err));
+		}
+
+		return result;
+	});
+}
+
+function getOutputs(callback) {
+	osascript(stringify(lib.getOutputs.method), osascriptOpts, function (err, data) {
+		var result;
+		if (!err) {
+			data = JSON.parse(data);
+			result = callback(data);
+		} else {
+			result = callback(logSymbols.error + ' ' + chalk.red(err));
+		}
+
+		return result;
+	});
+}
+
 module.exports = function (command, callback, args) {
 	switch (command) {
 		case 'play':
@@ -199,6 +229,16 @@ module.exports = function (command, callback, args) {
 			break;
 		case 'getData':
 			getData(function (response) {
+				return callback(response);
+			});
+			break;
+		case 'setOutput':
+			setOutputs(args.name, args.options, function (response) {
+				return callback(response);
+			});
+			break;
+		case 'getOutputs':
+			getOutputs(function (response) {
 				return callback(response);
 			});
 			break;
