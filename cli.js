@@ -188,4 +188,55 @@ vorpal
 		}, args);
 	});
 
+vorpal
+	.command('output [name]')
+	.option('-c, --clear', 'Clear other output selections')
+	.action(function (args, callback) {
+		var self = this;
+		if (args.name) {
+			var spinner = ora().start();
+			itunesRemote('setOutput', function (response) {
+				spinner.stop();
+				self.log(response);
+				callback();
+			}, args);
+		} else {
+			var spinner = ora('Finding available outputs ...').start();
+			itunesRemote('getOutputs', function (response) {
+				spinner.stop();
+	
+				self.prompt({
+					type: 'list',
+					name: 'output',
+					message: 'Choose an output',
+					choices: response.outputNames
+				}, function (result) {
+					var selectedOutput = result.output;
+					var spinner = ora().start();
+					itunesRemote('setOutput', function (response) {
+						spinner.stop();
+						self.log(response);
+						callback();
+					}, {
+						name: selectedOutput,
+						options: args.options
+					});
+				});
+			}, args);
+		}
+	});
+
+vorpal
+	.command('volume [volume]')
+	.action(function (args, callback) {
+		var self = this;
+		var spinner = ora().start();
+		itunesRemote('setVolume', function (response) {
+			spinner.stop();
+			self.log(response);
+			callback();
+		}, args);
+	});
+
+
 vorpal.parse(process.argv);

@@ -118,4 +118,30 @@ describe('itunesRemote', function () {
 			});
 		});
 	});
+
+	describe('command `setVolume`', function () {
+		it('should set volume', function (done) {
+			itunesRemote('setVolume', function (response) {
+				expect(response).to.equal('Volume set to: 75');
+				done();
+			}, { volume: '75' });
+		});
+
+		it('should fail correctly on invalid volume', function(done) {
+			itunesRemote('setVolume', function (response) {
+				expect(response).to.equal(logSymbols.error + ' ' + chalk.red('Error: Command failed: execution error: Error: Desired volume is invalid (-2700)\n'));
+				done();
+			}, { volume: 'this is not a valid volume'});
+		});
+	});
+
+	describe('command `getOutputs`', function () {
+		it('should return an object', function (done) {
+			itunesRemote('getOutputs', function (response) {
+				expect(response).to.an('object');
+				expect(response.outputNames).to.an('array');
+				done();
+			});
+		});
+	});
 });
