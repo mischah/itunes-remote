@@ -226,5 +226,17 @@ vorpal
 		}
 	});
 
+vorpal
+	.command('volume [volume]')
+	.action(function (args, callback) {
+		var self = this;
+		var spinner = ora().start();
+		itunesRemote('setVolume', function (response) {
+			spinner.stop();
+			self.log(response);
+			callback();
+		}, args);
+	});
+
 
 vorpal.parse(process.argv);

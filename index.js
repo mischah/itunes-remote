@@ -190,6 +190,22 @@ function getOutputs(callback) {
 	});
 }
 
+function setVolume(volume, callback) {
+	var command = stringify(lib.setVolume.method)
+		.replace(/{{desiredVolume}}/, volume);
+	
+	osascript(command, osascriptOpts, function (err, data) {
+		var result;
+		if (!err) {
+			result = callback('Volume set to: ' + volume);
+		} else {
+			result = callback(logSymbols.error + ' ' + chalk.red(err));
+		}
+
+		return result;
+	});
+}
+
 module.exports = function (command, callback, args) {
 	switch (command) {
 		case 'play':
@@ -239,6 +255,11 @@ module.exports = function (command, callback, args) {
 			break;
 		case 'getOutputs':
 			getOutputs(function (response) {
+				return callback(response);
+			});
+			break;
+		case 'setVolume':
+			setVolume(args.volume, function (response) {
 				return callback(response);
 			});
 			break;
