@@ -173,14 +173,14 @@ vorpal
 	});
 
 vorpal
-	.command('search <searchterm>', 'Fuzzy search album, artists and songs.')
+	.command('search [searchterm...]', 'Fuzzy search album, artists and songs.')
 	.option('-A, --albums', 'Limit search to albums')
 	.option('-s, --songs', 'Limit search to songs')
 	.option('-a, --artists', 'Limit search to artist')
 	.option('-d, --dont-play', 'Prevent playing the search result')
 	.action(function (args, callback) {
 		var self = this;
-		var spinner = ora('Searching …').start();
+		var spinner = ora('Searching… ').start();
 		itunesRemote('search', function (response) {
 			spinner.stop();
 			self.log(response);

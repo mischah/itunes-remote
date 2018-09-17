@@ -73,7 +73,7 @@ describe('itunesRemote', function () {
 				expect(response).to.equal(logSymbols.success + ' Found songs by ”' +
 				chalk.inverse('emancipator') + '“ and generated a temporary playlist');
 				done();
-			}, {searchterm: 'emancipator', options: {dontplay: true, artists: true}}
+			}, {searchterm: ['emancipator'], options: {dontplay: true, artists: true}}
 			);
 		});
 		it('should return error message when no search results for all', function (done) {
@@ -81,7 +81,7 @@ describe('itunesRemote', function () {
 				expect(response).to.equal(logSymbols.error + ' Oops. Found 0 songs, albums and artists containing ”' +
 				chalk.inverse('foozel') + '“.');
 				done();
-			}, {searchterm: 'foozel', options: {}}
+			}, {searchterm: ['foozel'], options: {}}
 			);
 		});
 		it('should return error message when no search results for albums', function (done) {
@@ -89,7 +89,7 @@ describe('itunesRemote', function () {
 				expect(response).to.equal(logSymbols.error + ' Oops. Found 0 album containing ”' +
 				chalk.inverse('foozel') + '“.');
 				done();
-			}, {searchterm: 'foozel', options: {albums: true}}
+			}, {searchterm: ['foozel'], options: {albums: true}}
 			);
 		});
 		it('should return error message when no search results for songs', function (done) {
@@ -97,7 +97,7 @@ describe('itunesRemote', function () {
 				expect(response).to.equal(logSymbols.error + ' Oops. Found 0 songs containing ”' +
 				chalk.inverse('foozel') + '“.');
 				done();
-			}, {searchterm: 'foozel', options: {songs: true}}
+			}, {searchterm: ['foozel'], options: {songs: true}}
 			);
 		});
 		it('should return error message when no search results for artists', function (done) {
@@ -105,7 +105,7 @@ describe('itunesRemote', function () {
 				expect(response).to.equal(logSymbols.error + ' Oops. Found 0 songs by ”' +
 				chalk.inverse('foozel') + '“.');
 				done();
-			}, {searchterm: 'foozel', options: {artists: true}}
+			}, {searchterm: ['foozel'], options: {artists: true}}
 			);
 		});
 	});

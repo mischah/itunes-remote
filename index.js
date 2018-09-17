@@ -193,7 +193,7 @@ module.exports = function (command, callback, args) {
 			});
 			break;
 		case 'search':
-			startSearch(args.searchterm, args.options, function (response) {
+			startSearch(args.searchterm.join(' '), args.options, function (response) {
 				return callback(response);
 			});
 			break;
