@@ -1,5 +1,5 @@
-# Credits for itunes-remote
-## itunes-remote relies on the work of 183 people:
+# Credits for Music-remote
+## music-remote relies on the work of 183 people:
 
 - **Sindre Sorhus** *sindresorhus@gmail.com* (108 packages)
 - **John-David Dalton** *john.david.dalton@gmail.com* (32 packages)

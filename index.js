@@ -203,6 +203,6 @@ module.exports = function (command, callback, args) {
 			});
 			break;
 		default:
-			throw new Error('You have to call itunesRemote with a command');
+			throw new Error('You have to call musicRemote with a command');
 	}
 };

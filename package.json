@@ -1,16 +1,16 @@
 {
-  "name": "itunes-remote",
+  "name": "music-remote",
   "version": "2.3.1",
-  "description": "Control iTunes via CLI",
+  "description": "Control music via CLI",
   "license": "MIT",
-  "repository": "mischah/itunes-remote",
+  "repository": "mischah/music-remote",
   "author": {
     "name": "Michael Kühnel",
     "email": "mail@michael-kuehnel.de",
     "url": "http://michael-kuehnel.de"
   },
   "bin": {
-    "itunes": "cli.js"
+    "music": "cli.js"
   },
   "preferGlobal": true,
   "engines": {
@@ -33,7 +33,7 @@
   "keywords": [
     "cli-app",
     "cli",
-    "itunes",
+    "music",
     "mac",
     "osx",
     "remote",
