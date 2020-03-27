@@ -4,23 +4,23 @@
 var vorpal = require('vorpal')();
 var ora = require('ora');
 var chalk = require('chalk');
-var itunesRemote = require('./');
+var musicRemote = require('./');
 
 vorpal
-	.history('itunes-remote')
-	.delimiter('iTunes:')
+	.history('music-remote')
+	.delimiter('Music:')
 	.show();
 
-vorpal.find('exit').description('Exit itunes-remote.');
+vorpal.find('exit').description('Exit music-remote.');
 
 vorpal
 	.command('play', 'Start playing the current selection.')
 	.alias('start')
-	.option('-E, --exit', 'exit itunes-remote after executing the command')
+	.option('-E, --exit', 'exit music-remote after executing the command')
 	.action(function (args, callback) {
 		var self = this;
 		var spinner = ora().start();
-		itunesRemote('play', function (response) {
+		musicRemote('play', function (response) {
 			spinner.stop();
 			if (args.options.exit) {
 				vorpal.execSync('exit');
@@ -35,7 +35,7 @@ vorpal
 		var self = this;
 		var spinner = ora('Getting artists').start();
 
-		itunesRemote('getData', function (response) {
+		musicRemote('getData', function (response) {
 			var artists = [];
 			spinner.stop();
 			artists = response.artists;
@@ -48,7 +48,7 @@ vorpal
 			}, function (result) {
 				var selectedArtist = result.artist;
 				var spinner = ora('Searching for songs by ' + chalk.blue(result.artist)).start();
-				itunesRemote('search', function (response) {
+				musicRemote('search', function (response) {
 					spinner.stop();
 					self.log(response);
 					callback();
@@ -66,7 +66,7 @@ vorpal
 		var self = this;
 		var spinner = ora('Getting albums').start();
 
-		itunesRemote('getData', function (response) {
+		musicRemote('getData', function (response) {
 			var albums = [];
 			spinner.stop();
 			albums = response.albums;
@@ -79,7 +79,7 @@ vorpal
 			}, function (result) {
 				var selectedAlbum = result.album;
 				var spinner = ora('Searching for albums named ' + chalk.blue(result.album)).start();
-				itunesRemote('search', function (response) {
+				musicRemote('search', function (response) {
 					spinner.stop();
 					self.log(response);
 					callback();
@@ -93,11 +93,11 @@ vorpal
 
 vorpal
 	.command('stop', 'Stop playing the current selection')
-	.option('-E, --exit', 'exit itunes-remote after executing the command')
+	.option('-E, --exit', 'exit music-remote after executing the command')
 	.action(function (args, callback) {
 		var self = this;
 		var spinner = ora().start();
-		itunesRemote('stop', function (response) {
+		musicRemote('stop', function (response) {
 			spinner.stop();
 			self.log(response);
 			if (args.options.exit) {
@@ -109,11 +109,11 @@ vorpal
 
 vorpal
 	.command('pause', 'Pause playing the current selection')
-	.option('-E, --exit', 'exit itunes-remote after executing the command')
+	.option('-E, --exit', 'exit music-remote after executing the command')
 	.action(function (args, callback) {
 		var self = this;
 		var spinner = ora().start();
-		itunesRemote('pause', function (response) {
+		musicRemote('pause', function (response) {
 			spinner.stop();
 			self.log(response);
 			if (args.options.exit) {
@@ -125,11 +125,11 @@ vorpal
 
 vorpal
 	.command('next', 'Advance to the next track in the current playlist.')
-	.option('-E, --exit', 'exit itunes-remote after executing the command')
+	.option('-E, --exit', 'exit music-remote after executing the command')
 	.action(function (args, callback) {
 		var self = this;
 		var spinner = ora().start();
-		itunesRemote('next', function (response) {
+		musicRemote('next', function (response) {
 			spinner.stop();
 			self.log(response);
 			if (args.options.exit) {
@@ -142,11 +142,11 @@ vorpal
 vorpal
 	.command('previous', 'Return to the previous track in the current playlist.')
 	.alias('prev')
-	.option('-E, --exit', 'exit itunes-remote after executing the command')
+	.option('-E, --exit', 'exit music-remote after executing the command')
 	.action(function (args, callback) {
 		var self = this;
 		var spinner = ora().start();
-		itunesRemote('previous', function (response) {
+		musicRemote('previous', function (response) {
 			spinner.stop();
 			self.log(response);
 			if (args.options.exit) {
@@ -158,11 +158,11 @@ vorpal
 
 vorpal
 	.command('back', 'Reposition to beginning of current track or go to previous track if already at start of current track.')
-	.option('-E, --exit', 'exit itunes-remote after executing the command')
+	.option('-E, --exit', 'exit music-remote after executing the command')
 	.action(function (args, callback) {
 		var self = this;
 		var spinner = ora().start();
-		itunesRemote('back', function (response) {
+		musicRemote('back', function (response) {
 			spinner.stop();
 			self.log(response);
 			if (args.options.exit) {
@@ -181,7 +181,7 @@ vorpal
 	.action(function (args, callback) {
 		var self = this;
 		var spinner = ora('Searching …').start();
-		itunesRemote('search', function (response) {
+		musicRemote('search', function (response) {
 			spinner.stop();
 			self.log(response);
 			callback();

@@ -5,9 +5,9 @@
 [![Unicorn approved](https://img.shields.io/badge/unicorn-approved-ff69b4.svg?style=flat)](https://www.youtube.com/watch?v=ihXfH-zR8qA&feature=youtu.be&t=10s)
 [![Mentioned in Awesome Node.js](https://awesome.re/mentioned-badge.svg)](https://github.com/sindresorhus/awesome-nodejs)
 
-# itunes-remote
+# music-remote
 
-> Control iTunes via your terminal :notes:
+> Control music via your terminal :notes:
 
 Using [JXA](https://developer.apple.com/library/mac/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/Introduction.html) via [osascript](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/osascript.1.html) via Node.js.
 
@@ -15,7 +15,7 @@ Using [JXA](https://developer.apple.com/library/mac/releasenotes/Interapplicatio
 
 - Node.js (v0.12.7 or greater)
 - Mac OS X (Yosemite 10.10.0 or greater)
-- Some tracks in your iTunes library
+- Some tracks in your music library
 
 ## Demo
 ![demo](demo.gif)
@@ -23,7 +23,7 @@ Using [JXA](https://developer.apple.com/library/mac/releasenotes/Interapplicatio
 ## Install
 
 ```
-$ npm install --global itunes-remote
+$ npm install --global music-remote
 ```
 
 
@@ -32,13 +32,13 @@ $ npm install --global itunes-remote
 It’s interactive and offering an own prompt.
 
 ```
-$ itunes
-iTunes: help
+$ music
+music: help
 
   Commands:
 
     help [command...]              Provides help for a given command.
-    exit                           Exit itunes-remote.
+    exit                           Exit music-remote.
     play                           Start playing the current selection
     play artist                    Plays songs by an artist.
     play album                     Plays an album.
@@ -50,15 +50,15 @@ iTunes: help
                                    start of current track.
     search [options] <searchterm>  Fuzzy search album, artists and songs.
 
-iTunes: 
+Music: 
 ```
 
 **Note:**  
 You can also pass commands and options from the outside.
 
 ```
-$ itunes stop --exit
-iTunes:
+$ music stop --exit
+Music:
 ✔ Stopped playing ♪♬
 $
 ```
