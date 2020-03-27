@@ -3,7 +3,7 @@
   "version": "2.3.1",
   "description": "Control music via CLI",
   "license": "MIT",
-  "repository": "mischah/music-remote",
+  "repository": "mischah/itunes-remote",
   "author": {
     "name": "Michael Kühnel",
     "email": "mail@michael-kuehnel.de",
@@ -33,7 +33,7 @@
   "keywords": [
     "cli-app",
     "cli",
-    "music",
+    "iTunes",
     "mac",
     "osx",
     "remote",
